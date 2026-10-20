@@ -26,8 +26,7 @@
     "test": "vitest run",
     "check:package": "publint --strict && attw --pack --profile esm-only --exclude-entrypoints ./theme.css",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "release": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm check:package && commit-and-tag-version && git push --follow-tags"
+    "build-storybook": "storybook build"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -58,7 +57,6 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitest/browser-playwright": "^5.0.5",
-    "commit-and-tag-version": "^13.3.0",
     "eslint": "^10.13.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-storybook": "^10.6.2",
