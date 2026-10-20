@@ -166,19 +166,3 @@ useClickOutside(ref, () => setOpen(false), open);
 useScrollLock(open);
 const context = useGetContext(MyContext); // throws outside the provider
 ```
-
-## Development
-
-```bash
-pnpm storybook
-```
-
-- `pnpm test` runs the tests in a real Chromium. The first time, install it with `pnpm exec playwright install chromium`.
-- `pnpm typecheck`, `pnpm lint` and `pnpm check:package` check the code and the published package.
-
-### Releases
-
-Releases are automatic from [Conventional Commits](https://www.conventionalcommits.org): `fix:` bumps the patch, `feat:` the minor and `feat!:` or a `BREAKING CHANGE:` footer the major.
-
-1. Every push to `main` opens or updates a release PR with the next version and changelog.
-2. Merging that PR tags the release and publishes it to npm from GitHub Actions.
