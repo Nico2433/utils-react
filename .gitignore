@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 *storybook.log
+# Storybook build
+storybook-static
+
+# Vitest browser failure screenshots
+.vitest

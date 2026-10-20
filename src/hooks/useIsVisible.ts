@@ -1,35 +1,41 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
-export const useIsVisible = <T extends HTMLElement>(
-  ref: React.RefObject<T>,
-  oneTime?: boolean
-) => {
-  const [intersecting, setIntersecting] = React.useState(false);
-  const observe = React.useRef<boolean>(true);
+export interface UseIsVisibleOptions {
+  /** Stops observing after the element becomes visible for the first time. */
+  once?: boolean;
+  rootMargin?: string;
+  threshold?: number;
+}
 
-  React.useEffect(() => {
-    if (!ref.current) throw new Error("ref cannot be null");
+/**
+ * Tracks whether an element is inside the viewport. Put the returned ref on the element:
+ * `const [ref, visible] = useIsVisible<HTMLDivElement>()`. It also works when the element mounts later.
+ */
+export const useIsVisible = <T extends Element = HTMLElement>({
+  once = false,
+  rootMargin,
+  threshold,
+}: UseIsVisibleOptions = {}) => {
+  const [element, setElement] = useState<T | null>(null);
+  const [visible, setVisible] = useState(false);
+  const done = once && visible;
 
-    const observer = new IntersectionObserver(([entry]) => {
-      if (
-        oneTime &&
-        entry.isIntersecting === true &&
-        observe.current === true
-      ) {
-        observe.current = false;
-        setIntersecting(true);
-        observer.disconnect();
-      } else {
-        setIntersecting(entry.isIntersecting);
-      }
-    });
+  useEffect(() => {
+    if (!element || done) return;
 
-    observer.observe(ref.current);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry) return;
+        if (once && !entry.isIntersecting) return;
+        setVisible(entry.isIntersecting);
+      },
+      { rootMargin, threshold }
+    );
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [ref, oneTime]);
+    observer.observe(element);
 
-  return intersecting;
+    return () => observer.disconnect();
+  }, [element, once, done, rootMargin, threshold]);
+
+  return [setElement, visible] as const;
 };

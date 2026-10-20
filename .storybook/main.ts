@@ -1,29 +1,13 @@
+import tailwindcss from "@tailwindcss/vite";
 import type { StorybookConfig } from "@storybook/react-vite";
-import { mergeConfig } from "vite";
-import * as viteTsConfig from "vite-tsconfig-paths";
-
-const tsconfigPaths = viteTsConfig.default;
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: [
-    "@storybook/addon-onboarding",
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions",
-  ],
-  framework: {
-    name: "@storybook/react-vite",
-    options: {},
-  },
-  docs: {
-    autodocs: "tag",
-  },
-  async viteFinal(config) {
-    return mergeConfig(config, {
-      plugins: [tsconfigPaths()],
-    });
-  },
+  stories: ["../src/**/*.stories.tsx"],
+  framework: "@storybook/react-vite",
+  viteFinal: (config) => ({
+    ...config,
+    plugins: [...(config.plugins ?? []), tailwindcss()],
+  }),
 };
+
 export default config;

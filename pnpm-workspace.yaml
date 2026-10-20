@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+
+# Own packages can be used as soon as they are published
+minimumReleaseAgeExclude:
+  - "@nico2433/*"

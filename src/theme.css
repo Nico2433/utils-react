@@ -1,0 +1,21 @@
+/*
+ * Import it after Tailwind:
+ *   @import "tailwindcss";
+ *   @import "@nico2433/utils-react/theme.css";
+ *
+ * Override any color in your own @theme block, e.g. `--color-ui-accent: var(--color-violet-600);`
+ */
+
+/* Lets Tailwind find the classes used by the components */
+@source "./";
+
+@theme {
+  /* Focus rings, checked controls and active states */
+  --color-ui-accent: var(--color-blue-500);
+  /* Error messages and invalid borders */
+  --color-ui-error: var(--color-red-500);
+  /* Neutral borders, like the drop area and the switch track */
+  --color-ui-border: var(--color-gray-300);
+  /* Secondary text, like descriptions and file sizes */
+  --color-ui-muted: var(--color-gray-500);
+}

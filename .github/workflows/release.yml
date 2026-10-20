@@ -1,0 +1,28 @@
+name: Release
+
+# `pnpm release` pushes a `v*` tag, and this publishes that version to npm
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  # Lets npm verify this workflow (trusted publishing) and sign the package (provenance)
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm check:package
+      - run: npm publish --provenance --access public
