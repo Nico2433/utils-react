@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## [2.0.0](https://github.com/Nico2433/utils-react/compare/v1.0.49...v2.0.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* the package is now @nico2433/utils-react and requires React 19.2+ and Tailwind CSS v4 (import "@nico2433/utils-react/theme.css"). Inputs no longer take config/register props, TextInput and DateInput are now Input, MenuDropdown is replaced by Modal, cloneComponent is removed, DocDelimiter uses limit instead of limits, and useIsVisible returns [ref, visible].
+
+### Features
+
+* rewrite as @nico2433/utils-react ([5ac93af](https://github.com/Nico2433/utils-react/commit/5ac93af37bdab5c38cc111461f89cc09c476bbb1))
+
 ### [1.0.49](https://github.com/Nico2433/custom-components/compare/v1.0.48...v1.0.49) (2024-04-18)
 
 ### [1.0.48](https://github.com/Nico2433/custom-components/compare/v1.0.47...v1.0.48) (2024-04-13)
